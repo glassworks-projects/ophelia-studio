@@ -11,7 +11,6 @@ const request = async () => {
 (async () => {
     const images = await request()
     images.data.contents.forEach(x => {
-        console.log(x.image.display.url);
         imgArr.push(<img key={x.id} src={x.image.display.url} alt='' style={{float: `right`}}/>)
     })
 })()

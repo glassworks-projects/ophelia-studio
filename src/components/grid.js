@@ -1,3 +1,5 @@
+/* Yikes! what a monster component this is. Make sure to abstract it later. */
+
 import React from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
@@ -20,12 +22,6 @@ const Contain = styled(motion.div)`
 const Cell = styled.div`
     border-top: 1px solid black;
     display: flex;
-`
-
-const Cell1 = styled(Cell)`
-
-`
-const Cell2 = styled(Cell)`
 `
 
 const Inner = styled.div`
@@ -76,15 +72,6 @@ const ImgCtr = styled(motion.div)`
     grid-row: 1/3;
     grid-column: 2/3;
 `
-function Images () {
-    return <div style={{
-        position: `absolute`,
-        width: `100%`,
-        height: `100%`
-        }}>
-        <Arena />
-    </div>
-}
 
 const trans = {ease: 'easeOut', duration: .25}
 
@@ -151,9 +138,8 @@ export default class Grid extends React.Component {
                 'gridTemplateColumns' : this.state.gridTemplateColumns,
                 'gridTemplateRows' : this.state.gridTemplateRows
             }}
-            transition={trans}
-            >
-                <Cell1>
+            transition={trans}>
+                <Cell>
                     <Inner border={true}>
                         {(this.state.expand == 1) ? 
                         <motion.div style={{
@@ -178,8 +164,8 @@ export default class Grid extends React.Component {
                         <H1 onClick={() => this.resize(1)}>REEL</H1>
                         }
                     </Inner>
-                </Cell1>
-                <Cell2>
+                </Cell>
+                <Cell>
                     <Inner>
                         {(this.state.expand == 2) ? 
                         <Info animate={{'height' : 'auto'}} transition={trans}>
@@ -197,8 +183,16 @@ export default class Grid extends React.Component {
                             <Inner small={true} border={true}>
                                 CLIENTS
                                 <UL>
-                                    <li>48k</li>
-                                    <li>Cavalier</li>
+                                    <li>
+                                        <Linkout href="https://48k.club">
+                                            48k
+                                        </Linkout>
+                                    </li>
+                                    <li>
+                                        <Linkout href="https://soundcloud.com/cavaliersound">
+                                            Cavalier
+                                        </Linkout>
+                                    </li>
                                 </UL>
                             </Inner>
                             <Inner small={true}> 
@@ -219,7 +213,7 @@ export default class Grid extends React.Component {
                         <H1 onClick={() => this.resize(2)}>INFO</H1>
                         }
                     </Inner>
-                </Cell2>
+                </Cell>
                 <Cell>
                     <Inner border={true}>
                         {(this.state.expand == 3) ?
@@ -253,7 +247,13 @@ export default class Grid extends React.Component {
                             <H1 onClick={() => this.resize(0)}>X</H1>
                                                        
                             <ImgCtr animate={{'height' : '60vh'}} transition={trans}>
-                                <Images />
+                                <div style={{
+                                    position: `absolute`,
+                                    width: `100%`,
+                                    height: `100%`
+                                    }}>
+                                    <Arena />
+                                </div>
                             </ImgCtr>
                             <div style={{
                                 display: `flex`, 
@@ -266,7 +266,10 @@ export default class Grid extends React.Component {
                                 style={{width: `50px`, marginBottom: `0px`}}
                                 alt='' />
                                 <div style={{fontSize: `0.75em`, lineHeight: `0.7em`, opacity: `0.8`}}>
-                                    Feeding from <Linkout href="https://www.are.na/jay-park">are.na</Linkout>
+                                    Feeding from 
+                                    <Linkout href="https://www.are.na/jay-park">
+                                        are.na
+                                    </Linkout>
                                 </div>
                             </div>
                         </ImgGrid>
